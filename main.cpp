@@ -1,4 +1,5 @@
 #include <QCoreApplication>
+#include <iostream>
 #include <QDebug>
 #include "evaluator.h"
 
@@ -7,10 +8,18 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     Evaluator *eval = new Evaluator;
-    QString str = eval->autoFix("pi(5)", ".");
-    eval->setExpression(str);
+    std::string expression;
 
-    qDebug() << QString(HMath::formatFixed(eval->eval()));
+    while (std::cin >> expression) {
+        QString str = eval->autoFix(QString::fromStdString(expression), ".");
+        eval->setExpression(str);
+
+        if (eval->error().isEmpty()) {
+            qDebug() << QString(HMath::formatFixed(eval->eval()));
+        } else {
+            qDebug() << eval->error();
+        }
+    }
 
     return a.exec();
 }

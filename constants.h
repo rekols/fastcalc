@@ -15,7 +15,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
- */
+*/
 
 #ifndef CONSTANTS
 #define CONSTANTS
@@ -28,19 +28,19 @@
 class Constant
 {
 public:
-  QString name;
-  QString value;
-  QString unit;
-  QStringList categories;
+    QString name;
+    QString value;
+    QString unit;
+    QStringList categories;
 
-  Constant( const QString& n, const QString& v, const QString& u, const QStringList& cat ):
-    name( n ), value( v ), unit( u ), categories( cat ) {}
+    Constant(const QString& n, const QString& v, const QString& u, const QStringList& cat):
+        name(n), value(v), unit(u), categories(cat) {}
 
-  Constant( const QString& n, const QString& v, const QString& u, const QString& cat ):
-    name( n ), value( v ), unit( u ) { categories << cat; }
+    Constant(const QString& n, const QString& v, const QString& u, const QString& cat):
+        name(n), value(v), unit(u) { categories << cat; }
 
-  Constant( const QString& n, const QString& v, const QString& u, const QString& cat1,   const QString& cat2):
-    name( n ), value( v ), unit( u ) {  categories << cat1; categories << cat2; }
+    Constant(const QString& n, const QString& v, const QString& u, const QString& cat1,   const QString& cat2):
+        name(n), value(v), unit(u) {  categories << cat1; categories << cat2; }
 
 };
 
@@ -48,10 +48,10 @@ public:
 
 class Constants : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
-    explicit Constants( QObject* parent );
+public:
+    explicit Constants(QObject* parent);
 
     QList<Constant> constantList;
     QStringList categoryList;

@@ -47,7 +47,7 @@ class Token
       LeftPar,        //  (
       RightPar,       //  )
       Semicolon,      // argument separator
-      Percent,
+      Percent,        // %
       Exclamation,    // ! (factorial)
       Equal,          // variable assignment
       Modulo,         // integer rest devision
@@ -145,4 +145,3 @@ class Evaluator
 
 
 #endif // EVALUATOR
-

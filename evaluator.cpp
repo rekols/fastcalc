@@ -1362,30 +1362,31 @@ HNumber Evaluator::eval()
 
 void Evaluator::set( const QString& id, HNumber value )
 {
-  if( !id.isEmpty() )
-  {
-    d->variables[ id.toUpper() ].name = id;
-    d->variables[ id.toUpper() ].value = value;
+  if (!id.isEmpty()) {
+    d->variables[id].name = id;
+    d->variables[id].value = value;
   }
 }
 
 HNumber Evaluator::get( const QString& id )
 {
-  if( id.isEmpty() ) return HNumber( 0 );
+  if (id.isEmpty())
+    return HNumber(0);
 
-  if( !d->variables.contains( id.toUpper() ) )
-    set( id, HNumber( 0 ) );
-  return d->variables[ id.toUpper() ].value;
+  if (!d->variables.contains(id))
+    set(id, HNumber(0));
+
+  return d->variables[id].value;
 }
 
 bool Evaluator::has( const QString& id )
 {
-  return id.isEmpty() ? false : d->variables.contains( id.toUpper() );
+  return id.isEmpty() ? false : d->variables.contains(id);
 }
 
 void Evaluator::remove( const QString& id )
 {
-  d->variables.remove( id.toUpper() );
+  d->variables.remove(id);
 }
 
 QVector<Variable> Evaluator::variables() const

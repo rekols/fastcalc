@@ -1,0 +1,2 @@
+# fastcalc
+powerful calculator algorithm.

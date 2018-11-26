@@ -1290,17 +1290,20 @@ HNumber Evaluator::eval()
       // reference
       case Opcode::Ref:
         fname = d->identifiers[index];
-        if( has( fname ) )
-          stack.push( get( fname ) );
+        if (has(fname)) {
+            // variable
+            stack.push( get( fname ) );
+        }
         else
         {
+            // function
           function = FunctionRepository::self()->function( fname );
           if( function )
             refs.push( fname );
           else
           {
             d->error = qApp->translate( "Error",
-              "Undefined variable '%1'" ).arg( fname );
+              "Undefined variable or identifier '%1'" ).arg( fname );
             return HNumber( 0 );
           }
         }
@@ -1308,15 +1311,10 @@ HNumber Evaluator::eval()
 
       // calling function
       case Opcode::Function:
-        if( stack.count() < index )
-        {
-          d->error = qApp->translate( "Error", "Invalid expression" );
-          return HNumber( 0 );
-        }
-
-        args.clear();
-        for( ; index; index-- )
-          args.insert( args.begin(), stack.pop() );
+        // must do this first to avoid crash when using vars like functions
+          if (refs.isEmpty()) {
+              break;
+          }
 
         fname = refs.pop();
         function = FunctionRepository::self()->function( fname );
@@ -1325,6 +1323,16 @@ HNumber Evaluator::eval()
           d->error = QString( qApp->translate( "Error",
             "Unknown function or identifier: %1" ) ).arg( fname );
           return HNumber( 0 );
+        }
+
+        if (stack.count() < index) {
+            d->error = qApp->translate("Error", "Invalid expression");
+            return HNumber(0);
+        }
+
+        args.clear();
+        for (; index; index --) {
+            args.insert(args.begin(), stack.pop());
         }
 
         stack.push( function->exec( this, args ) );

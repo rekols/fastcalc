@@ -1145,7 +1145,7 @@ HNumber Evaluator::eval()
   }
 
   // magic: always set here to avoid being overwritten by user
-  set( QString("PI"), HMath::pi() );
+  set(QString("pi"), HMath::pi());
 
   for( int pc = 0; pc < d->codes.count(); pc++ )
   {
@@ -1408,8 +1408,8 @@ QVector<Variable> Evaluator::variables() const
 void Evaluator::clearVariables()
 {
   d->variables.clear();
-  set( QString("PI"), HMath::pi() );
-  set( QString("ans"), HNumber(0) );
+  set(QString("pi"), HMath::pi());
+  set(QString("ans"), HNumber(0));
 }
 
 QString Evaluator::autoFix( const QString& expr, const QString& decimalPoint )

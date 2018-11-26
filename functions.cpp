@@ -424,7 +424,7 @@ public:
   QString desc;
   QString error;
   FunctionPtr ptr;
-  
+
   FunctionPrivate(): name(), argc(0), desc(), error(), ptr(0) {}
 };
 
@@ -567,7 +567,7 @@ void FunctionRepository::add( Function* function )
 
 Function* FunctionRepository::function( const QString& name )
 {
-  return d->functions[ name.toUpper() ];
+  return d->functions.value(name.toUpper());
 }
 
 QStringList FunctionRepository::functionNames() const

@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     Evaluator *eval = new Evaluator;
-    QString str = eval->autoFix("111*333333333333333333+33333", ".");
+    QString str = eval->autoFix("1/3", ".");
     eval->setExpression(str);
 
     qDebug() << QString(HMath::formatFixed(eval->eval()));

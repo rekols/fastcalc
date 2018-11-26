@@ -34,7 +34,7 @@
 #define HMATH_COMPARE_PREC 70
 
 // maximum shown digits if prec is negative
-#define HMATH_MAX_SHOWN 20
+#define HMATH_MAX_SHOWN 10
 
 // from number.c, need to be freed somehow
 extern bc_num _zero_;
@@ -1239,7 +1239,7 @@ HNumber HMath::exp( const HNumber& x )
     factor ++;
     xs = xs * half;
   }
-  
+
   // Taylor expansion: e^x = 1 + x + x^2/2! + x^3/3! + ...
   HNumber num = xs;
   HNumber den = 1;
@@ -1263,7 +1263,7 @@ HNumber HMath::exp( const HNumber& x )
       factor--;
       result *= result;
     }
-    
+
   if( negative )
     result = HMath::div( HNumber(1), result );
 

@@ -761,11 +761,10 @@ char* HMath::formatFixed(const HNumber& hn, int prec)
     return str;
 }
 
-// format number with exponential
-char* HMath::formatExp(const HNumber& hn, int prec)
+// format number in scientific notation
+char *HMath::formatScientific(const HNumber &hn, int prec)
 {
-    if(hn.isNan())
-    {
+    if (hn.isNan()) {
         char* str = (char*)malloc(4);
         str[0] = 'N';
         str[1] = 'a';
@@ -818,8 +817,7 @@ char* HMath::formatExp(const HNumber& hn, int prec)
 
 char* HMath::formatGeneral(const HNumber& hn, int prec)
 {
-    if(hn.isNan())
-    {
+    if (hn.isNan()) {
         char* str = (char*)malloc(4);
         str[0] = 'N';
         str[1] = 'a';
@@ -836,11 +834,11 @@ char* HMath::formatGeneral(const HNumber& hn, int prec)
 
     char* str;
     if(expd > 5)
-        str = formatExp(hn, prec);
+        str = formatScientific(hn, prec);
     else if((expd < -4) && (expd>-HMATH_COMPARE_PREC))
-        str = formatExp(hn, prec);
+        str = formatScientific(hn, prec);
     else if ((expd < 0) && (prec>0) && (expd < -prec))
-        str = formatExp(hn, prec);
+        str = formatScientific(hn, prec);
     else
         str = formatFixed(hn, prec);
 
@@ -972,7 +970,7 @@ char* HMath::format(const HNumber& hn, char format, int prec)
     else if (format == 'n')
         return formatEngineering(hn, prec);
     else if (format == 'e')
-        return formatExp(hn, prec);
+        return formatScientific(hn, prec);
     else if (format == 'h')
         return formatHexadec(hn);
     else if (format == 'o')

@@ -173,22 +173,21 @@ HNumber function_cos(const Evaluator* eval, Function*, const FunctionArguments& 
 
 HNumber function_tan(const Evaluator* eval, Function* fn, const FunctionArguments& args)
 {
-    if(args.count() != 1)
+    if (args.count() != 1)
         return HNumber::nan();
 
     HNumber angle = args[0];
-    if(eval->angleMode() == Evaluator::Degree)
+    if (eval->angleMode() == Evaluator::Degree)
         angle = deg2rad(angle);
 
-    HNumber halfpi = HMath::pi() / HNumber(2);
-    if((angle == halfpi) || (angle == halfpi*HNumber(3)))
-    {
-        fn->setError(qApp->translate("Error",
-                                       "Invalid input to function tan"));
+    HNumber result = HMath::tan(angle);
+    if (result.isNan()) {
+        fn->setError(QApplication::translate("Error",
+                                              "function undefined for specified parameter"));
         return HNumber::nan();
     }
 
-    return HMath::tan(angle);
+    return result;
 }
 
 HNumber function_asin(const Evaluator* eval, Function*, const FunctionArguments& args)

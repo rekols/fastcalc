@@ -37,7 +37,7 @@
 #define HMATH_COMPARE_PREC 70
 
 // maximum shown digits if prec is negative
-#define HMATH_MAX_SHOWN 20
+#define HMATH_MAX_SHOWN 10
 
 // from number.c, need to be freed somehow
 extern bc_num _zero_;

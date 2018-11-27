@@ -15,7 +15,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
- */
+*/
 
 #ifndef EVALUATOR
 #define EVALUATOR
@@ -27,31 +27,31 @@
 
 class Token
 {
-  public:
+public:
     typedef enum
     {
-      Unknown,
-      Number,
-      Operator,
-      Identifier
+        Unknown,
+        Number,
+        Operator,
+        Identifier
     } Type;
 
     typedef enum
     {
-      InvalidOp = 0,
-      Plus,           //  + (addition)
-      Minus,          //  - (substraction, negation)
-      Asterisk,       //  * (multiplication)
-      Slash,          //  / (division)
-      Caret,          //  ^ (power)
-      LeftPar,        //  (
-      RightPar,       //  )
-      Semicolon,      // argument separator
-      Percent,        // %
-      Exclamation,    // ! (factorial)
-      Equal,          // variable assignment
-      Modulo,         // integer rest division
-      Div             // integer division
+        InvalidOp = 0,
+        Plus,           //  + (addition)
+        Minus,          //  - (substraction, negation)
+        Asterisk,       //  * (multiplication)
+        Slash,          //  / (division)
+        Caret,          //  ^ (power)
+        LeftPar,        //  (
+        RightPar,       //  )
+        Semicolon,      // argument separator
+        Percent,        // %
+        Exclamation,    // ! (factorial)
+        Equal,          // variable assignment
+        Modulo,         // integer rest division
+        Div             // integer division
     } Op;
 
     Token( Type type = Unknown, const QString& text = QString::null, int pos = -1 );
@@ -71,7 +71,7 @@ class Token
 
     static const Token null;
 
-  protected:
+protected:
 
     Type m_type;
     QString m_text;
@@ -82,17 +82,17 @@ class Token
 
 class Tokens: public QVector<Token>
 {
-  public:
+public:
     Tokens(): QVector<Token>(), m_valid(true) {};
     bool valid() const { return m_valid; }
     void setValid( bool v ){ m_valid = v; }
-  protected:
+protected:
     bool m_valid;
 };
 
 class Variable
 {
-  public:
+public:
     QString name;
     HNumber value;
 };
@@ -101,7 +101,7 @@ class EvaluatorPrivate;
 
 class Evaluator
 {
-  public:
+public:
 
     typedef enum { Degree, Radian } AngleMode;
 
@@ -133,11 +133,11 @@ class Evaluator
 
     QString dump() const;
 
-  protected:
+protected:
 
     void compile( const Tokens& tokens ) const;
 
-  private:
+private:
     EvaluatorPrivate *d;
     Evaluator( const Evaluator& );
     Evaluator& operator=( const Evaluator& );
@@ -145,4 +145,3 @@ class Evaluator
 
 
 #endif // EVALUATOR
-

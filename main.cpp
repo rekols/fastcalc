@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
         eval->setExpression(str);
 
         if (eval->error().isEmpty()) {
-            qDebug() << QString(HMath::format(eval->eval(), 'n'));
+            qDebug() << QString(HMath::formatFixed(eval->eval()));
         } else {
             qDebug() << eval->error();
         }

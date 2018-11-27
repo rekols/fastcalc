@@ -1440,20 +1440,32 @@ QString Evaluator::autoFix(const QString& expr, const QString& decimalPoint)
 
     // automagically close all parenthesis
     Tokens tokens = Evaluator::scan(result, decimalPoint);
-    for(int i=0; i<tokens.count(); i++)
-        if(tokens[i].asOperator() == Token::LeftPar) par++;
-        else if(tokens[i].asOperator() == Token::RightPar) par--;
-    for(; par > 0; par--)
-        result.append(')');
+    if (tokens.count()) {
+        for (int i = 0; i < tokens.count(); ++i) {
+            if (tokens[i].asOperator() == Token::LeftPar) {
+                ++par;
+            } else if (tokens[i].asOperator() == Token::RightPar) {
+                --par;
+            }
+        }
+
+        // if the scanner stops in the middle, do not bother to apply fix.
+        const Token &lastToken = tokens[tokens.count() - 1];
+        if (lastToken.pos() + lastToken.text().length() >= result.length()) {
+            while (par--) {
+                result.append(')');
+            }
+        }
+    }
 
     // special treatment for simple function
     // e.g. "cos" is regarded as "cos(ans)"
-    if(!result.isEmpty())
+    if (!result.isEmpty())
     {
         Tokens tokens = Evaluator::scan(result, decimalPoint);
-        if(tokens.count() == 1)
+        if (tokens.count() == 1)
         {
-            if(tokens[0].isIdentifier())
+            if (tokens[0].isIdentifier())
             {
                 Function* f = FunctionRepository::self()->function(tokens[0].text());
                 if(f) result.append("(ans)");

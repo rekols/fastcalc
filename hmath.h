@@ -183,43 +183,48 @@ public:
      * Formats the given number as string, using specified decimal digits.
      * Note that the returned string must be freed.
      */
-    static char* format(const HNumber&n, char format = 'g', int prec = -1);
+    static char *format(const HNumber&n, char format = 'g', int prec = -1);
+    /*!
+    * Formats the given number as string, in engineering notation.
+    * Note that the returned string must be freed.
+    */
+    static char *formatEngineering(const HNumber &hn, int prec = -1);
 
     /*!
      * Formats the given number as string, using specified decimal digits.
      * Note that the returned string must be freed.
      */
-    static char* formatFixed(const HNumber&n, int prec = -1);
+    static char *formatFixed(const HNumber&n, int prec = -1);
 
     /*!
      * Formats the given number as string, in exponential format.
      * Note that the returned string must be freed.
      */
-    static char* formatExp(const HNumber&n, int prec = -1);
+    static char *formatExp(const HNumber&n, int prec = -1);
 
     /*!
      * Formats the given number as string, using specified decimal digits.
      * Note that the returned string must be freed.
      */
-    static char* formatGeneral(const HNumber&n, int prec = -1);
+    static char *formatGeneral(const HNumber&n, int prec = -1);
 
     /*!
      * Formats the given number as string, using hexadecimal digits. (NaN if hn isn't integer)
      * Note that the returned string must be freed.
      */
-    static char* formatHexadec(const HNumber&n);
+    static char *formatHexadec(const HNumber&n);
 
     /*!
      * Formats the given number as string, using octal digits. (NaN if hn isn't integer)
      * Note that the returned string must be freed.
      */
-    static char* formatOctal(const HNumber&n);
+    static char *formatOctal(const HNumber&n);
 
     /*!
      * Formats the given number as string, using binary digits. (NaN if hn isn't integer)
      * Note that the returned string must be freed.
      */
-    static char* formatBinary(const HNumber&n);
+    static char *formatBinary(const HNumber&n);
 
     /*!
      * Returns the constant pi.

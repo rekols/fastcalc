@@ -15,7 +15,7 @@
    along with this program; see the file COPYING.  If not, write to
    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
    Boston, MA 02110-1301, USA.
-*/
+ */
 
 #ifndef EVALUATOR
 #define EVALUATOR
@@ -27,37 +27,37 @@
 
 class Token
 {
-public:
+  public:
     typedef enum
     {
-        Unknown,
-        Number,
-        Operator,
-        Identifier
+      Unknown,
+      Number,
+      Operator,
+      Identifier
     } Type;
 
     typedef enum
     {
-        InvalidOp = 0,
-        Plus,           //  + (addition)
-        Minus,          //  - (substraction, negation)
-        Asterisk,       //  * (multiplication)
-        Slash,          //  / (division)
-        Caret,          //  ^ (power)
-        LeftPar,        //  (
-        RightPar,       //  )
-        Semicolon,      // argument separator
-        Percent,        // %
-        Exclamation,    // ! (factorial)
-        Equal,          // variable assignment
-        Modulo,         // integer rest devision
-        Div             // integer devision
+      InvalidOp = 0,
+      Plus,           //  + (addition)
+      Minus,          //  - (substraction, negation)
+      Asterisk,       //  * (multiplication)
+      Slash,          //  / (division)
+      Caret,          //  ^ (power)
+      LeftPar,        //  (
+      RightPar,       //  )
+      Semicolon,      // argument separator
+      Percent,        // %
+      Exclamation,    // ! (factorial)
+      Equal,          // variable assignment
+      Modulo,         // integer rest division
+      Div             // integer division
     } Op;
 
-    Token(Type type = Unknown, const QString& text = QString::null, int pos = -1);
+    Token( Type type = Unknown, const QString& text = QString::null, int pos = -1 );
 
-    Token(const Token&);
-    Token& operator=(const Token&);
+    Token( const Token& );
+    Token& operator=( const Token& );
 
     Type type() const { return m_type; }
     QString text() const { return m_text; }
@@ -71,7 +71,7 @@ public:
 
     static const Token null;
 
-protected:
+  protected:
 
     Type m_type;
     QString m_text;
@@ -82,17 +82,17 @@ protected:
 
 class Tokens: public QVector<Token>
 {
-public:
+  public:
     Tokens(): QVector<Token>(), m_valid(true) {};
     bool valid() const { return m_valid; }
-    void setValid(bool v){ m_valid = v; }
-protected:
+    void setValid( bool v ){ m_valid = v; }
+  protected:
     bool m_valid;
 };
 
 class Variable
 {
-public:
+  public:
     QString name;
     HNumber value;
 };
@@ -101,47 +101,48 @@ class EvaluatorPrivate;
 
 class Evaluator
 {
-public:
+  public:
 
     typedef enum { Degree, Radian } AngleMode;
 
     Evaluator();
     ~Evaluator();
-    void setExpression(const QString& expr);
+    void setExpression( const QString& expr );
     QString expression() const;
     void clear();
     bool isValid() const;
     Tokens tokens() const;
-    static Tokens scan(const QString& expr, const QString& decimalPoint);
+    static Tokens scan( const QString& expr, const QString& decimalPoint );
     QString error() const;
 
-    void setAngleMode(AngleMode am);
+    void setAngleMode( AngleMode am );
     AngleMode angleMode() const;
     HNumber eval();
 
-    void setDecimalPoint(const QString& d);
+    void setDecimalPoint( const QString& d );
     QString decimalPoint() const;
 
-    void set(const QString& id, HNumber value);
-    HNumber get(const QString& id);
-    bool has(const QString& id);
-    void remove(const QString& id);
+    void set( const QString& id, HNumber value );
+    HNumber get( const QString& id );
+    bool has( const QString& id );
+    void remove( const QString& id );
     QVector<Variable> variables() const;
     void clearVariables();
 
-    static QString autoFix(const QString& expr, const QString& decimalPoint);
+    static QString autoFix( const QString& expr, const QString& decimalPoint );
 
     QString dump() const;
 
-protected:
+  protected:
 
-    void compile(const Tokens& tokens) const;
+    void compile( const Tokens& tokens ) const;
 
-private:
+  private:
     EvaluatorPrivate *d;
-    Evaluator(const Evaluator&);
-    Evaluator& operator=(const Evaluator&);
+    Evaluator( const Evaluator& );
+    Evaluator& operator=( const Evaluator& );
 };
 
 
 #endif // EVALUATOR
+

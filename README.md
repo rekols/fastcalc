@@ -2,4 +2,26 @@
 
 ![](https://travis-ci.org/rekols/fastcalc.svg?branch=master)
 
-powerful calculator algorithm.
+мощный алгоритм калькулятора.
+
+## зависимости
+
+* sudo apt install qt5-default g++
+
+## Как запустить ?
+
+* mkdir build
+
+* cd build
+
+* qmake ..
+
+* make
+
+## Применение
+
+* ./fastcalc
+
+## Лицензия
+
+Rekols(unsonwong@gmail.com)

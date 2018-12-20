@@ -4,6 +4,8 @@
 
 мощный алгоритм калькулятора.
 
+![](screenshot/20181220103800.png)
+
 ## зависимости
 
 * sudo apt install qt5-default g++

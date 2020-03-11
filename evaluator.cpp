@@ -21,6 +21,7 @@
 
 #include "evaluator.h"
 #include "functions.h"
+#include "opcode.h"
 
 #include <float.h>
 #include <limits.h>
@@ -49,20 +50,6 @@ QTextStream& operator<<( QTextStream& s, HNumber num )
 }
 
 #endif
-
-class Opcode
-{
-public:
-
-    enum { Nop = 0, Load, Ref, Function, Add, Sub, Neg, Mul, Div, Pow, Fact, Modulo, IntDiv };
-
-    unsigned type;
-    unsigned index;
-
-    Opcode(): type(Nop), index(0) {};
-    Opcode( unsigned t ): type(t), index(0) {};
-    Opcode( unsigned t, unsigned i ): type(t), index(i) {};
-};
 
 class EvaluatorPrivate
 {
